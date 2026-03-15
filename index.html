@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nayer | Dev — Hacking · Programación · IA</title>
+  <meta name="description" content="Dev, creador de contenido y founder. Hacking, programación, marketing digital e infoproductos. Potenciado por IA. Bolivia."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursor-trail"></div>
+
+  <!-- Matrix canvas -->
+  <canvas id="matrix-bg"></canvas>
+
+  <!-- Scan line overlay -->
+  <div class="scanlines"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <span class="logo-bracket">[</span>nayer<span class="logo-accent">_</span>dev<span class="logo-bracket">]</span>
+        <span class="nav-logo-cursor">▋</span>
+      </a>
+      <div class="nav-links">
+        <a href="#sobre-mi" class="nav-link" data-text="sobre mi">sobre mi</a>
+        <a href="#servicios" class="nav-link" data-text="servicios">servicios</a>
+        <a href="#contenido" class="nav-link" data-text="contenido">contenido</a>
+        <a href="#ecosistema" class="nav-link" data-text="ecosistema">ecosistema</a>
+        <a href="#contacto" class="nav-link" data-text="contacto">contacto</a>
+      </div>
+      <a href="#contacto" class="nav-cta">
+        <span>trabajemos juntos</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#sobre-mi" class="mobile-link">// sobre mi</a>
+      <a href="#servicios" class="mobile-link">// servicios</a>
+      <a href="#contenido" class="mobile-link">// contenido</a>
+      <a href="#ecosistema" class="mobile-link">// ecosistema</a>
+      <a href="#contacto" class="mobile-link">// contacto</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-left">
+      <div class="hero-badge" data-reveal>
+        <span class="badge-pulse"></span>
+        <span class="badge-text">disponible para proyectos</span>
+      </div>
+      <h1 class="hero-title" data-reveal>
+        <span class="h-line h-greeting">Hola, soy</span>
+        <span class="h-line h-name">Nayer<span class="accent">.</span></span>
+        <span class="h-line h-role">Dev &amp; Creador</span>
+      </h1>
+      <p class="hero-desc" data-reveal>
+        Estudiante de Ing. Informática en Bolivia. Creo contenido sobre
+        <span class="hl">programación</span>,
+        <span class="hl">hacking</span> y
+        <span class="hl">tecnología</span> —
+        potenciado por IA. Construyo webs, SaaS y una startup marketplace para Latinoamérica.
+      </p>
+      <div class="hero-actions" data-reveal>
+        <a href="#sobre-mi" class="btn-primary">
+          <span>conocer más</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+        <a href="#servicios" class="btn-ghost">contratar servicios</a>
+      </div>
+      <div class="hero-stats" data-reveal>
+        <div class="hstat">
+          <span class="hstat-n" data-count="1500">0</span><span class="hstat-u">+</span>
+          <span class="hstat-l">seguidores TikTok</span>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <span class="hstat-n" data-count="6">0</span>
+          <span class="hstat-l">fuentes de ingreso</span>
+        </div>
+        <div class="hstat-div"></div>
+        <div class="hstat">
+          <span class="hstat-n" data-count="100">0</span><span class="hstat-u">%</span>
+          <span class="hstat-l">potenciado por IA</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right" data-reveal>
+      <div class="terminal-wrap">
+        <div class="terminal">
+          <div class="term-bar">
+            <div class="term-dots">
+              <span class="td red"></span>
+              <span class="td yellow"></span>
+              <span class="td green"></span>
+            </div>
+            <span class="term-title">nayer@dev: ~</span>
+            <span class="term-badge">SSH</span>
+          </div>
+          <div class="term-body">
+            <div class="term-row">
+              <span class="tp">nayer@dev:~$</span>
+              <span id="typing-text"></span><span class="tcursor">▋</span>
+            </div>
+            <div id="term-out"></div>
+          </div>
+        </div>
+        <div class="term-glow"></div>
+      </div>
+      <div class="ftag ftag-1">Python 🐍</div>
+      <div class="ftag ftag-2">Hacking 🔐</div>
+      <div class="ftag ftag-3">IA 🤖</div>
+      <div class="ftag ftag-4">SaaS 🚀</div>
+      <div class="ftag ftag-5">Bolivia 🇧🇴</div>
+    </div>
+  </section>
+
+  <!-- SOBRE MI con foto -->
+  <section class="sobre" id="sobre-mi">
+    <div class="container">
+      <div class="slabel" data-reveal>// sobre_mi.init()</div>
+      <div class="sobre-grid">
+
+        <!-- Foto interactiva -->
+        <div class="foto-col" data-reveal>
+          <div class="foto-frame" id="foto-frame">
+            <div class="foto-scanner" id="foto-scanner"></div>
+            <div class="foto-corner tl"></div>
+            <div class="foto-corner tr"></div>
+            <div class="foto-corner bl"></div>
+            <div class="foto-corner br"></div>
+            <img src="miFoto.jpg" alt="Nayer Dev" class="mi-foto" id="mi-foto" onerror="this.parentElement.classList.add('no-foto')"/>
+            <div class="foto-overlay">
+              <div class="foto-overlay-text">nayer_dev.jpg</div>
+            </div>
+            <div class="foto-badge-bottom">
+              <span class="fbadge-dot"></span>
+              Disponible
+            </div>
+          </div>
+          <div class="foto-stats">
+            <div class="fs-item">
+              <span class="fs-num" data-count="1">0</span><span class="fs-u">+</span>
+              <span class="fs-l">año creando</span>
+            </div>
+            <div class="fs-div"></div>
+            <div class="fs-item">
+              <span class="fs-num" data-count="20">0</span><span class="fs-u">+</span>
+              <span class="fs-l">proyectos</span>
+            </div>
+            <div class="fs-div"></div>
+            <div class="fs-item">
+              <span class="fs-num" data-count="8">0</span>
+              <span class="fs-l">tech skills</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texto -->
+        <div class="sobre-text" data-reveal>
+          <h2 class="stitle">Construyendo el<br><span class="accent">futuro tech</span><br>desde Bolivia</h2>
+          <p>Soy Nayer, dev y estudiante de Ingeniería Informática en Cochabamba. Creo contenido que explica el lado oscuro y fascinante de la tecnología para principiantes, usando IA para producir a escala.</p>
+          <p>Mientras construyo mi startup, me financio con lo que sé hacer: desarrollo web con IA, marketing digital y cursos. Comparto todo el proceso en público.</p>
+          <p class="sobre-mision"><span class="sobre-mision-label">// misión:</span> Demostrar que desde cualquier rincón de LATAM se puede construir tecnología de clase mundial.</p>
+          <div class="sobre-pills">
+            <span class="pill">Ing. Informática</span>
+            <span class="pill">Full-stack Dev</span>
+            <span class="pill">Creador de contenido</span>
+            <span class="pill">Founder</span>
+            <span class="pill">IA Enthusiast</span>
+          </div>
+          <div class="stack-box">
+            <div class="stack-title">// tech_stack</div>
+            <div class="stack-grid">
+              <div class="sitem" data-hover="⚡">Python</div>
+              <div class="sitem" data-hover="🌐">JavaScript</div>
+              <div class="sitem" data-hover="⚛️">React</div>
+              <div class="sitem" data-hover="🔧">Node.js</div>
+              <div class="sitem" data-hover="🤖">GPT API</div>
+              <div class="sitem" data-hover="🎨">Figma/IA</div>
+              <div class="sitem" data-hover="☁️">Vercel</div>
+              <div class="sitem" data-hover="🔐">Kali Linux</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="servicios" id="servicios">
+    <div class="container">
+      <div class="slabel" data-reveal>// servicios.json</div>
+      <h2 class="stitle centered" data-reveal>Lo que puedo<br><span class="accent">hacer por ti</span></h2>
+      <div class="sv-grid" data-reveal>
+
+        <div class="sv-card featured" data-tilt>
+          <div class="sv-glow"></div>
+          <div class="sv-tag">más solicitado</div>
+          <div class="sv-icon">🌐</div>
+          <h3>Web con IA</h3>
+          <p>Landing pages y webs profesionales creadas con IA en tiempo récord. Diseño moderno, responsive y listo para convertir.</p>
+          <div class="sv-price">desde <strong>$150 USD</strong></div>
+          <a href="#contacto" class="sv-btn">solicitar →</a>
+        </div>
+
+        <div class="sv-card" data-tilt>
+          <div class="sv-icon">📱</div>
+          <h3>Meta Ads con IA</h3>
+          <p>Creación y gestión de anuncios en Facebook e Instagram usando IA para copy, creativos y segmentación.</p>
+          <div class="sv-price">desde <strong>$100 USD/mes</strong></div>
+          <a href="#contacto" class="sv-btn">solicitar →</a>
+        </div>
+
+        <div class="sv-card" data-tilt>
+          <div class="sv-icon">⚡</div>
+          <h3>Automatizaciones IA</h3>
+          <p>Flujos con Make.com y GPT API que trabajan 24/7. Automatiza procesos repetitivos sin intervención humana.</p>
+          <div class="sv-price">desde <strong>$200 USD</strong></div>
+          <a href="#contacto" class="sv-btn">solicitar →</a>
+        </div>
+
+        <div class="sv-card" data-tilt>
+          <div class="sv-icon">🎨</div>
+          <h3>Identidad visual IA</h3>
+          <p>Logo, branding y materiales de marketing generados con IA. Identidad profesional sin presupuesto de agencia.</p>
+          <div class="sv-price">desde <strong>$80 USD</strong></div>
+          <a href="#contacto" class="sv-btn">solicitar →</a>
+        </div>
+
+        <div class="sv-card" data-tilt>
+          <div class="sv-icon">📦</div>
+          <h3>Pack redes sociales</h3>
+          <p>Contenido mensual para tus redes generado con IA. Posts, stories y reels listos cada semana.</p>
+          <div class="sv-price">desde <strong>$120 USD/mes</strong></div>
+          <a href="#contacto" class="sv-btn">solicitar →</a>
+        </div>
+
+        <div class="sv-card" data-tilt>
+          <div class="sv-icon">🚀</div>
+          <h3>SaaS &amp; Apps Web</h3>
+          <p>Desarrollo de aplicaciones web con pagos recurrentes. Stack moderno, deploy en Vercel, integración PayPal.</p>
+          <div class="sv-price">cotización a medida</div>
+          <a href="#contacto" class="sv-btn">solicitar →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENIDO / REDES -->
+  <section class="contenido" id="contenido">
+    <div class="container">
+      <div class="slabel" data-reveal>// redes.connect()</div>
+      <h2 class="stitle centered" data-reveal>Sígueme en<br><span class="accent">todas las plataformas</span></h2>
+
+      <div class="redes-grid" data-reveal>
+
+        <a href="https://youtube.com/@nayerdev?si=AvfgiiZan12WbRIj" target="_blank" rel="noopener" class="red-card yt">
+          <div class="rc-left">
+            <div class="rc-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </div>
+            <div class="rc-info">
+              <span class="rc-name">YouTube</span>
+              <span class="rc-handle">@nayerdev</span>
+            </div>
+          </div>
+          <div class="rc-right">
+            <span class="rc-desc">Hacking, programación y cultura tech</span>
+            <span class="rc-arrow">↗</span>
+          </div>
+          <div class="rc-bar"></div>
+        </a>
+
+        <a href="https://www.tiktok.com/@bytecraftcode?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" class="red-card tt">
+          <div class="rc-left">
+            <div class="rc-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.79 1.52V6.76a4.85 4.85 0 0 1-1.02-.07z"/></svg>
+            </div>
+            <div class="rc-info">
+              <span class="rc-name">TikTok</span>
+              <span class="rc-handle">@nayerdev</span>
+            </div>
+          </div>
+          <div class="rc-right">
+            <span class="rc-desc">1,500+ seguidores · tech en 60 seg</span>
+            <span class="rc-arrow">↗</span>
+          </div>
+          <div class="rc-bar"></div>
+        </a>
+
+        <a href="https://www.instagram.com/nayereulatemollo/" target="_blank" rel="noopener" class="red-card ig">
+          <div class="rc-left">
+            <div class="rc-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </div>
+            <div class="rc-info">
+              <span class="rc-name">Instagram</span>
+              <span class="rc-handle">@nayer_eulate</span>
+            </div>
+          </div>
+          <div class="rc-right">
+            <span class="rc-desc">Behind the scenes · dev life</span>
+            <span class="rc-arrow">↗</span>
+          </div>
+          <div class="rc-bar"></div>
+        </a>
+
+        <a href="https://wa.me/59168518643" target="_blank" rel="noopener" class="red-card wa">
+          <div class="rc-left">
+            <div class="rc-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            </div>
+            <div class="rc-info">
+              <span class="rc-name">WhatsApp</span>
+              <span class="rc-handle">Contacto directo</span>
+            </div>
+          </div>
+          <div class="rc-right">
+            <span class="rc-desc">Para proyectos y consultas</span>
+            <span class="rc-arrow">↗</span>
+          </div>
+          <div class="rc-bar"></div>
+        </a>
+
+      </div>
+
+      <!-- Ticker -->
+      <div class="ticker-wrap" data-reveal>
+        <div class="ticker-label">// temas</div>
+        <div class="ticker-outer">
+          <div class="ticker-track" id="ticker">
+            <span class="tk">Cultura Hacker</span><span class="ts">—</span>
+            <span class="tk">Programación</span><span class="ts">—</span>
+            <span class="tk">Hacking Ético</span><span class="ts">—</span>
+            <span class="tk">Marketing Digital</span><span class="ts">—</span>
+            <span class="tk">Infoproductos</span><span class="ts">—</span>
+            <span class="tk">Startup Life</span><span class="ts">—</span>
+            <span class="tk">IA &amp; Automatización</span><span class="ts">—</span>
+            <span class="tk">Dark Web</span><span class="ts">—</span>
+            <span class="tk">Python</span><span class="ts">—</span>
+            <span class="tk">Matemáticas para Devs</span><span class="ts">—</span>
+            <span class="tk">Cultura Hacker</span><span class="ts">—</span>
+            <span class="tk">Programación</span><span class="ts">—</span>
+            <span class="tk">Hacking Ético</span><span class="ts">—</span>
+            <span class="tk">Marketing Digital</span><span class="ts">—</span>
+            <span class="tk">Infoproductos</span><span class="ts">—</span>
+            <span class="tk">Startup Life</span><span class="ts">—</span>
+            <span class="tk">IA &amp; Automatización</span><span class="ts">—</span>
+            <span class="tk">Dark Web</span><span class="ts">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECOSISTEMA -->
+  <section class="ecosistema" id="ecosistema">
+    <div class="container">
+      <div class="slabel" data-reveal>// ecosystem.map</div>
+      <h2 class="stitle centered" data-reveal>El ecosistema<br><span class="accent">Nayer Dev</span></h2>
+      <div class="eco-grid" data-reveal>
+        <div class="eco-card" data-eco="0">
+          <div class="eco-num">01</div>
+          <div class="eco-icon">📺</div>
+          <h3>Contenido</h3>
+          <p>YouTube + TikTok. Hacking, programación y tech para principiantes. 100% potenciado por IA.</p>
+          <div class="eco-status active">activo</div>
+        </div>
+        <div class="eco-connector">→</div>
+        <div class="eco-card" data-eco="1">
+          <div class="eco-num">02</div>
+          <div class="eco-icon">🎓</div>
+          <h3>Infoproductos</h3>
+          <p>Cursos en Hotmart sobre hacking ético, Python y marketing. Red de afiliados propia.</p>
+          <div class="eco-status building">en construcción</div>
+        </div>
+        <div class="eco-connector">→</div>
+        <div class="eco-card" data-eco="2">
+          <div class="eco-num">03</div>
+          <div class="eco-icon">⚙️</div>
+          <h3>Servicios IA</h3>
+          <p>Webs, ads, automatizaciones y branding para negocios locales y de toda Latinoamérica.</p>
+          <div class="eco-status active">activo</div>
+        </div>
+        <div class="eco-connector eco-down">↓</div>
+        <div class="eco-card eco-wide" data-eco="3">
+          <div class="eco-wide-left">
+            <div class="eco-num">04</div>
+            <div class="eco-icon">🏪</div>
+          </div>
+          <div class="eco-wide-right">
+            <h3>Marketplace Bolivia → LATAM</h3>
+            <p>App marketplace con pagos QR (Libelula) para Bolivia. Expandiéndose a Perú, Colombia y más países de la región.</p>
+            <div class="eco-countries">
+              <span>🇧🇴 Bolivia</span>
+              <span>→</span>
+              <span>🇵🇪 Perú</span>
+              <span>→</span>
+              <span>🇨🇴 Colombia</span>
+              <span>→</span>
+              <span>🌎 LATAM</span>
+            </div>
+            <div class="eco-status roadmap">roadmap 2025</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <div class="container">
+      <div class="slabel" data-reveal>// contacto.init()</div>
+      <div class="contacto-inner" data-reveal>
+        <h2 class="stitle">¿Listo para<br><span class="accent">construir algo</span><br>increíble?</h2>
+        <p class="contact-desc">Ya sea que necesites una web, quieras aprender programación o tengas un proyecto de startup — hablemos.</p>
+        <div class="contact-btns">
+          <a href="https://wa.me/59168518643" target="_blank" rel="noopener" class="cbtn cbtn-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Escríbeme por WhatsApp
+          </a>
+          <a href="mailto:nayereulate.dev@gmail.com" class="cbtn cbtn-email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            nayereulate.dev@gmail.com
+          </a>
+        </div>
+        <div class="contact-note">// respondo en menos de 24 horas</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-bracket">[</span>nayer<span class="logo-accent">_</span>dev<span class="logo-bracket">]</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://youtube.com/@nayerdev?si=AvfgiiZan12WbRIj" target="_blank">YouTube</a>
+          <a href="https://www.tiktok.com/@bytecraftcode?is_from_webapp=1&sender_device=pc" target="_blank">TikTok</a>
+          <a href="https://www.instagram.com/nayereulatemollo/" target="_blank">Instagram</a>
+          <a href="https://wa.me/59168518643" target="_blank">WhatsApp</a>
+        </div>
+        <div class="footer-copy">© 2025 Nayer Dev · Cochabamba, Bolivia 🇧🇴</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
